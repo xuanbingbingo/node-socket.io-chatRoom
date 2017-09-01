@@ -5,7 +5,7 @@ var express = require('express'),
   io = require('socket.io').listen(server),
   users=[];//保存所有在线用户的昵称
 app.use('/', express.static(__dirname + '/www'));
-server.listen(80);
+server.listen(8080);
 //socket部分
 io.on('connection', function(socket) {
   //昵称设置
@@ -22,7 +22,7 @@ io.on('connection', function(socket) {
   });
   socket.on('postMsg', function(msg) {
         //将消息发送到除自己外的所有用户
-        io.sockets.emit('newMsg', socket.nickname, msg);
+        // io.sockets.emit('newMsg', socket.nickname, msg);
         socket.broadcast.emit('newMsg', socket.nickname, msg);
     });
 });
